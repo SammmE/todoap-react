@@ -35,6 +35,7 @@ const lightTheme = createTheme({
 
 export const ViewList = (props) => {
     const [listItems, setListItems] = React.useState([]);
+    const [isItems, setIsItems] = React.useState(false);
 
     let { id } = useParams();
 
@@ -72,52 +73,75 @@ export const ViewList = (props) => {
             <Button sx={{ width: "100%" }} href="/" variant="contained">
                 Go back
             </Button>
-            {listItems.map((name, index) => (
+            {isItems ? (
                 <div>
-                    <Card variant="outlined" key={index}>
-                        <CardContent>
-                            <Typography
-                                sx={{ fontSize: 20 }}
-                                color="text.primary"
-                                gutterBottom
-                            >
-                                <Button
-                                    sx={{
-                                        marginRight: 10,
-                                    }}
-                                    onClick={() => {
-                                        new Audio(doneChime).play();
-                                        onAuthStateChanged(
-                                            auth,
-                                            async (user) => {
-                                                const docSnap = await getDoc(
-                                                    doc(db, user.uid, id)
-                                                );
-                                                if (docSnap.exists()) {
-                                                    var newList = [];
-                                                    newList =
-                                                        docSnap.data().items;
-                                                    newList.splice(index, 1);
-                                                }
+                    {listItems.map((name, index) => (
+                        <div>
+                            <Card variant="outlined" key={index}>
+                                <CardContent>
+                                    <Typography
+                                        sx={{ fontSize: 20 }}
+                                        color="text.primary"
+                                        gutterBottom
+                                    >
+                                        <Button
+                                            sx={{
+                                                marginRight: 10,
+                                            }}
+                                            onClick={() => {
+                                                new Audio(doneChime).play();
+                                                onAuthStateChanged(
+                                                    auth,
+                                                    async (user) => {
+                                                        const docSnap =
+                                                            await getDoc(
+                                                                doc(
+                                                                    db,
+                                                                    user.uid,
+                                                                    id
+                                                                )
+                                                            );
+                                                        if (docSnap.exists()) {
+                                                            var newList = [];
+                                                            newList =
+                                                                docSnap.data()
+                                                                    .items;
+                                                            newList.splice(
+                                                                index,
+                                                                1
+                                                            );
+                                                        }
 
-                                                setDoc(doc(db, user.uid, id), {
-                                                    items: newList,
-                                                    timestamp:
-                                                        serverTimestamp(),
-                                                });
-                                                getAllItems();
-                                            }
-                                        );
-                                    }}
-                                >
-                                    Done!
-                                </Button>
-                                {name}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                                                        setDoc(
+                                                            doc(
+                                                                db,
+                                                                user.uid,
+                                                                id
+                                                            ),
+                                                            {
+                                                                items: newList,
+                                                                timestamp:
+                                                                    serverTimestamp(),
+                                                            }
+                                                        );
+                                                        getAllItems();
+                                                    }
+                                                );
+                                            }}
+                                        >
+                                            Done!
+                                        </Button>
+                                        {name}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            ) : (
+                <Typography>Found no items in list. maybe reload?😕</Typography>
+            )}
+
             <SpeedDial
                 ariaLabel="actions"
                 sx={{ position: "absolute", bottom: 16, right: 16 }}

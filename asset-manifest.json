@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/todoap-react/static/css/main.80493270.css",
+    "main.js": "/todoap-react/static/js/main.429e5403.js",
+    "static/js/787.b0fb7ae0.chunk.js": "/todoap-react/static/js/787.b0fb7ae0.chunk.js",
+    "static/media/done.mp3": "/todoap-react/static/media/done.c77d66618e15f4aa722c.mp3",
+    "index.html": "/todoap-react/index.html",
+    "main.80493270.css.map": "/todoap-react/static/css/main.80493270.css.map",
+    "main.429e5403.js.map": "/todoap-react/static/js/main.429e5403.js.map",
+    "787.b0fb7ae0.chunk.js.map": "/todoap-react/static/js/787.b0fb7ae0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80493270.css",
+    "static/js/main.429e5403.js"
+  ]
+}

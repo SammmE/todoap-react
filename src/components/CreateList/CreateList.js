@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { ThemeProvider } from "@emotion/react";
 import { getDarkMode } from "../DarkModeBtn/DarkModeButton";
 import { Link } from "react-router-dom";
+import { Title } from "../Title/Title";
 
 const darkTheme = createTheme({
     palette: {
@@ -47,6 +48,7 @@ export const CreateList = () => {
     return (
         <ThemeProvider theme={getDarkMode() ? darkTheme : lightTheme}>
             <CssBaseline />
+            <Title />
             <TextField
                 variant="outlined"
                 label="List Name"

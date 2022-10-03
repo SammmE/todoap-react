@@ -17,8 +17,27 @@ export function Title(props) {
             />
             <h1 className="title">To Do App</h1>
 
-            <DarkModeButton />
-            <SignInButton />
+            <div
+                style={{
+                    margin: "auto",
+                }}
+            >
+                {props.children}
+            </div>
+            <div
+                style={{
+                    margin: "auto",
+                }}
+            >
+                <DarkModeButton />
+            </div>
+            <div
+                style={{
+                    margin: "auto",
+                }}
+            >
+                <SignInButton />
+            </div>
         </div>
     );
 }

@@ -4,12 +4,14 @@ import {
     CardContent,
     createTheme,
     CssBaseline,
+    IconButton,
     SpeedDial,
     SpeedDialAction,
     SpeedDialIcon,
     ThemeProvider,
     Typography,
 } from "@mui/material";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import * as React from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDarkMode } from "../DarkModeBtn/DarkModeButton";
@@ -19,7 +21,7 @@ import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import doneChime from "../../assets/done.mp3";
-import { ConstructionOutlined } from "@mui/icons-material";
+import { Title } from "../Title/Title";
 
 const darkTheme = createTheme({
     palette: {
@@ -35,7 +37,7 @@ const lightTheme = createTheme({
 
 export const ViewList = (props) => {
     const [listItems, setListItems] = React.useState([]);
-    const [isItems, setIsItems] = React.useState(false);
+    const [isItems, setIsItems] = React.useState(true);
 
     let { id } = useParams();
 
@@ -58,8 +60,11 @@ export const ViewList = (props) => {
             const docSnap = await getDoc(doc(db, user.uid, id));
             if (docSnap.exists()) {
                 setListItems(docSnap.data().items);
-                if (listItems === []) {
-                    setListItems([]);
+                console.log(listItems.length === 0);
+                if (listItems.length === 0) {
+                    setIsItems(false);
+                } else {
+                    setIsItems(true);
                 }
             }
         });
@@ -70,6 +75,16 @@ export const ViewList = (props) => {
     return (
         <ThemeProvider theme={getDarkMode() ? darkTheme : lightTheme}>
             <CssBaseline />
+            <Title>
+                <IconButton
+                    aria-label="reload"
+                    onClick={() => {
+                        getAllItems();
+                    }}
+                >
+                    <RefreshIcon />
+                </IconButton>
+            </Title>
             <Button sx={{ width: "100%" }} href="/" variant="contained">
                 Go back
             </Button>

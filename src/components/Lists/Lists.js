@@ -3,6 +3,9 @@ import * as React from "react";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import DeleteIcon from "@mui/icons-material/Delete";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import {
     Button,
@@ -11,6 +14,7 @@ import {
     CardContent,
     createTheme,
     CssBaseline,
+    IconButton,
     Typography,
 } from "@mui/material";
 import {
@@ -27,6 +31,7 @@ import { ThemeProvider } from "@emotion/react";
 import { getDarkMode } from "../DarkModeBtn/DarkModeButton";
 import { Link } from "react-router-dom";
 import doneChime from "../../assets/done.mp3";
+import { Title } from "../Title/Title";
 
 const darkTheme = createTheme({
     palette: {
@@ -86,6 +91,16 @@ export function Lists() {
 
     return (
         <ThemeProvider theme={getDarkMode() ? darkTheme : lightTheme}>
+            <Title>
+                <IconButton
+                    aria-label="reload"
+                    onClick={() => {
+                        getAllData();
+                    }}
+                >
+                    <RefreshIcon />
+                </IconButton>
+            </Title>
             <CssBaseline />
             {isLists ? (
                 <div>
@@ -108,13 +123,15 @@ export function Lists() {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button
+                                <IconButton
+                                    aria-label="View"
                                     href={`/view/${d.name}`}
                                     variant="contained"
                                 >
-                                    View
-                                </Button>
-                                <Button
+                                    <RemoveRedEyeIcon />
+                                </IconButton>
+                                <IconButton
+                                    aria-label="DELETE"
                                     sx={{ marginLeft: 2 }}
                                     variant="contained"
                                     onClick={() => {
@@ -132,8 +149,8 @@ export function Lists() {
                                         getAllData();
                                     }}
                                 >
-                                    DELETE
-                                </Button>
+                                    <DeleteIcon />
+                                </IconButton>
                             </CardActions>
                         </Card>
                     ))}

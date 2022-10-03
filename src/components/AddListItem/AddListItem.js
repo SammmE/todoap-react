@@ -12,6 +12,7 @@ import { getDarkMode } from "../DarkModeBtn/DarkModeButton";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "../../firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
+import { Title } from "../Title/Title";
 
 const darkTheme = createTheme({
     palette: {
@@ -57,6 +58,7 @@ export const AddListItem = () => {
     return (
         <ThemeProvider theme={getDarkMode() ? darkTheme : lightTheme}>
             <CssBaseline />
+            <Title />
             <TextField
                 variant="outlined"
                 label="Item Name"

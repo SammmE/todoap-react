@@ -6,14 +6,13 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 export const DarkModeButton = (props) => {
     return (
         <IconButton
-            sx={{}}
             onClick={() => {
                 localStorage.setItem("darkMode", getDarkMode() ? false : true);
                 window.location.reload(false);
             }}
             color="inherit"
         >
-            {getDarkMode() ? <Brightness7Icon sx={{}} /> : <Brightness4Icon />}
+            {getDarkMode() ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>
     );
 };

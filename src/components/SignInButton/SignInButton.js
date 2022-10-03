@@ -21,20 +21,9 @@ export function SignInButton() {
     return (
         <div>
             {user ? (
-                <Avatar
-                    sx={{
-                        top: 23,
-                        right: 5,
-                    }}
-                    alt={user.displayName}
-                    src={user.photoURL}
-                ></Avatar>
+                <Avatar alt={user.displayName} src={user.photoURL}></Avatar>
             ) : (
                 <Button
-                    sx={{
-                        top: 23,
-                        right: 5,
-                    }}
                     variant="contained"
                     className="signInButton"
                     onClick={() => signInWithGoogle()}
